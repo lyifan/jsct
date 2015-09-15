@@ -1,3 +1,6 @@
+<jsp:include page="../header.jsp"></jsp:include>
+<h2>Please login</h2>
+<hr/>
 <p style="color:${resultColor}">${result}</p>
 <form method="POST">
 	<div>
@@ -24,3 +27,4 @@
 		</div>
 	</div>
 </form>
+<jsp:include page="../footer.jsp"></jsp:include>

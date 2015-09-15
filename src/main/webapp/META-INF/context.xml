@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<Context path="/training">
+<Context path="/training" useHttpOnly="false">
 	<Resource name="jdbc/trainingDB" auth="Container" type="javax.sql.DataSource"
 		maxActive="100" maxIdle="30" maxWait="10000"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"

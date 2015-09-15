@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,19 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 //TODO: USE SpringMVC + AngularJS
 
-public abstract class Login extends BaseController {
+@Controller
+@RequestMapping("/login")
+public class Login extends BaseController {
 
 	private String hashPassword(char[] password) {
 		return new String(password);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void doPrivilegeAction(@RequestParam("loginName") String username, @RequestParam("password") char[] password, Model model)
+	public String doPrivilegeAction(@RequestParam("loginName") String username, @RequestParam("password") char[] password, Model model, HttpSession session)
 			throws Exception {
 		Connection connection = getConnection();
-		if (connection == null) {
-			// Handle error
-		}
 		try {
 			String pwd = hashPassword(password);
 
@@ -34,18 +36,45 @@ public abstract class Login extends BaseController {
 			
 			boolean success = rs.next();
 			
-			model.addAttribute("result", success ? "You've logged in" : "User name or password incorrect");
-			model.addAttribute("resultColor", success ? "green" : "red");
-
+			return this.checkResult(success, model, session, username);
+			
 		} finally {
 			try {
 				connection.close();
 			} catch (SQLException x) {
-				// Forward to handler
 			}
 		}
 	}
 	
-	protected abstract PreparedStatement generateStatement(Connection connection, String username, String pwd) throws SQLException;
+	private String checkResult(boolean success, Model model, HttpSession session, String username) {
+		if(!success) {
+			model.addAttribute("result", "User name or password incorrect");
+			model.addAttribute("resultColor", "red");
+	
+			return "/login";
+		}
+		
+		session.setAttribute("USER", username);
+		
+		return "redirect:/home";		
+	}
+	
+/*	private PreparedStatement generateStatement(Connection connection, String username, String pwd)
+			throws SQLException {
+		
+		String sqlString = "select * from TblUser where LoginName = ? and Password = ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sqlString);
+		
+		stmt.setString(1, username);
+		stmt.setString(2, pwd);
 
+		return stmt;
+	}*/
+	
+	private PreparedStatement generateStatement(Connection connection, String username, String pwd)
+			throws SQLException {
+		String sqlString = "select * from TblUser where LoginName = '" + username + "' and Password ='" + pwd + "'";
+		return connection.prepareStatement(sqlString);
+	}	
 }
