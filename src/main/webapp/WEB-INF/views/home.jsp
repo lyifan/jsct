@@ -1,15 +1,35 @@
-<jsp:include page="../header.jsp"></jsp:include>
-<h2>Welcome, ${USER}</h2>
-<hr/>
-<p>${message}</p>
+<%@ include file="../header.jsp" %>
+<h2>Welcome, ${USER.loginName}</h2>
 <hr />
+<table>
+	<thead>
+		<tr>
+			<td>Message</td>
+			<td>Posted By</td>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="row" items="${messages}">
+			<tr>
+				<td>${row.message}</td>
+				<td>${row.user}</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+<hr />
+<br/>
 <form action="home/post" method="POST">
-<div><label for="message">Say something here: </label></div>
-<br/>
-<div>
-	<textarea rows="5" style="width:100%" name="message"></textarea>
-</div>
-<br/>
-<div><input type="submit" value="Post"/></div>
+	<div style="margin-bottom: 3px">
+		<label for="message">Say something here: </label>
+	</div>
+	<div>
+		<textarea rows="5" style="width: 100%" name="message"></textarea>
+	</div>
+	<br />
+	<div>
+		<input type="submit" value="Post" />
+	</div>
+	<input type="hidden" name="userId" value="${USER.userId}" />
 </form>
-<jsp:include page="../footer.jsp"></jsp:include>
+<%@ include file="../footer.jsp" %>

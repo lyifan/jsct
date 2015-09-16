@@ -6,6 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,9 +19,9 @@ public abstract class BaseController {
 		
 		return datasource.getConnection();
 	}
-	
+
 	@RequestMapping(method=RequestMethod.GET)
-	public void index() {
+	public void index(Model model) {
 		
 	}
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wcg.training.web.model.UserModel;
+
 //TODO: USE SpringMVC + AngularJS
 
 @Controller
@@ -34,10 +36,7 @@ public class Login extends BaseController {
 
 			ResultSet rs = stmt.executeQuery();
 			
-			boolean success = rs.next();
-			
-			return this.checkResult(success, model, session, username);
-			
+			return this.checkResult(rs, model, session);
 		} finally {
 			try {
 				connection.close();
@@ -46,7 +45,9 @@ public class Login extends BaseController {
 		}
 	}
 	
-	private String checkResult(boolean success, Model model, HttpSession session, String username) {
+	private String checkResult(ResultSet rs, Model model, HttpSession session) throws SQLException {
+		boolean success = rs.next();
+		
 		if(!success) {
 			model.addAttribute("result", "User name or password incorrect");
 			model.addAttribute("resultColor", "red");
@@ -54,7 +55,11 @@ public class Login extends BaseController {
 			return "/login";
 		}
 		
-		session.setAttribute("USER", username);
+		UserModel user = new UserModel();
+		user.setLoginName(rs.getString("LoginName"));
+		user.setUserId(rs.getInt("ID"));
+		
+		session.setAttribute("USER", user);
 		
 		return "redirect:/home";		
 	}

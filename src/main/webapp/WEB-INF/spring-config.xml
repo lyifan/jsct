@@ -2,12 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd 
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee.xsd">
 
 	<context:component-scan base-package="com.wcg.training" />
 
@@ -23,4 +29,36 @@
 
 	<mvc:annotation-driven />
 
+
+	<!-- <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+		/> <property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=Test;integratedSecurity=true" 
+		/> <property name="username" value="sa" /> <property name="password" value="" 
+		/> </bean> -->
+
+
+	<jee:jndi-lookup id="myDataSource" jndi-name="java:comp/env/jdbc/trainingDB" />
+
+
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.wcg.training.domain</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
+			</value>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<tx:annotation-driven />
 </beans>

@@ -1,4 +1,4 @@
-<jsp:include page="../header.jsp"></jsp:include>
+<%@ include file="../header.jsp" %>
 <h2>Please login</h2>
 <hr/>
 <p style="color:${resultColor}">${result}</p>
@@ -27,4 +27,4 @@
 		</div>
 	</div>
 </form>
-<jsp:include page="../footer.jsp"></jsp:include>
+<%@ include file="../footer.jsp" %>
