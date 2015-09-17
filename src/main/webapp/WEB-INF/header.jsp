@@ -11,25 +11,57 @@
 	body {
 		margin: 10% 10%;
 		padding: 0;
-		font-size: larger;
-		background-color: #FFB
+		font-size: 150%;
+		background-color: rgba(255,255,0,0.3);
 	}
+	
+	form {
+		
+	}
+	
+	label {
+		line-height: 150%;
+	}
+	
+	input[type=submit] {
+		font-size: 120%;
+	}
+	
+	input[type=text],input[type=password] {
+		line-height: 150%;
+		font-size: 150%;
+		width: 40%;
+	}
+	
+	textarea {
+		font-size: 150%;
+	}
+	
 	table {
 		width: 100%;
 		line-height: 150%;
 		text-align: center;
-	}
-	table thead {
-		background-color: lightblue;
-		color: #000;
-		font-weight: bold;
-	}
-	table tbody {
-		background-color: #C0C0C0;
+		border-collapse:collapse;
 	}
 	
-	table tbody tr:nth-child(even) {
-		background-color: #E0E0E0;
+	tr td {
+		border-bottom: 1px dotted #000;
+	}
+	
+	tr:last-child td {
+		border-bottom: 2px solid #000;
+	}
+	
+	tr:nth-child(even) {
+		background-color: rgba(192,192,192,0.3);
+	}
+	
+	td a.d-cell {
+		background-image: url(content/img/remove.svg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 16px 16px;
+		cursor: pointer;
 	}
 	</style>
 </head>

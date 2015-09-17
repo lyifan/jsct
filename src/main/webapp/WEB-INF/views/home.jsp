@@ -4,6 +4,7 @@
 <table>
 	<thead>
 		<tr>
+			<td/>
 			<td>Message</td>
 			<td>Posted By</td>
 		</tr>
@@ -11,13 +12,14 @@
 	<tbody>
 		<c:forEach var="row" items="${messages}">
 			<tr>
+				<td><a class="d-cell" href='home/delete/${row.messageId}' onclick="return confirm('Delete it?');">&nbsp;&nbsp;</a></td>
 				<td>${row.message}</td>
 				<td>${row.user}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-<hr />
+
 <br/>
 <form action="home/post" method="POST">
 	<div style="margin-bottom: 3px">
@@ -32,4 +34,9 @@
 	</div>
 	<input type="hidden" name="userId" value="${USER.userId}" />
 </form>
+<script type="text/javascript">
+function _delete(id) {
+	
+}
+</script>
 <%@ include file="../footer.jsp" %>

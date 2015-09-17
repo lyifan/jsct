@@ -25,6 +25,7 @@ public class MessageService {
 		List<Message> messages = messageDao.getAll();
 		for(Message msg : messages) {
 			MessageModel row = new MessageModel();
+			row.setMessageId(msg.getId());
 			row.setMessage(msg.getMesssage());
 			row.setUser(msg.getUser().getLoginName());
 			result.add(row);
@@ -39,6 +40,10 @@ public class MessageService {
 		m.setUserId(userId);
 		
 		messageDao.save(m);
+	}
+	
+	public void deleteMessage(int messageId) {
+		messageDao.deleteById(messageId);
 	}
 	
 }

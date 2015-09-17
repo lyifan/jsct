@@ -2,6 +2,8 @@ package com.wcg.training.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +30,14 @@ public abstract class GenericDao<T extends java.io.Serializable> {
     
     public void save(T entity) {
     	this.sessionFactory.getCurrentSession().save(entity);
+    }
+    
+    public void deleteById(int id) {
+    	Session currentSession = this.sessionFactory.getCurrentSession();
+		Query query = currentSession.createQuery("delete " + this.entityClass.getName() + " where id = :ID");
+    	query.setParameter("ID", id);
+    	 
+    	query.executeUpdate();
     }
 	
 }

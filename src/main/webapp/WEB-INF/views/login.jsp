@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<h2>Please login</h2>
+<h2>Please Login</h2>
 <hr/>
 <p style="color:${resultColor}">${result}</p>
 <form method="POST">
@@ -9,7 +9,7 @@
 				<label for="loginName">Login name: </label>
 			</div>
 			<div>
-				<input name="loginName" />
+				<input type="text" name="loginName" />
 			</div>
 		</div>
 		<br/>

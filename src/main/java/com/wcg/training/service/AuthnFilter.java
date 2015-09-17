@@ -32,6 +32,12 @@ public class AuthnFilter implements Filter {
 			return;
 		}
 		
+		if(request.getServletPath().startsWith("/logoff")) {
+			request.getSession().invalidate();
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
+		
 		response.addIntHeader("X-XSS-Protection", 0);
 		
 		filterChain.doFilter(request, response);
