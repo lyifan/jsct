@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wcg.training.web.model.UserModel;
 
-//TODO: USE SpringMVC + AngularJS
-
 @Controller
 @RequestMapping("/login")
 public class Login extends BaseController {
