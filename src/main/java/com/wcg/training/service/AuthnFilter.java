@@ -34,7 +34,7 @@ public class AuthnFilter implements Filter {
 		
 		if(request.getServletPath().startsWith("/logoff")) {
 			request.getSession().invalidate();
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath());
 			return;
 		}
 		

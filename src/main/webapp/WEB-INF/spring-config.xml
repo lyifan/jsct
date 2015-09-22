@@ -26,6 +26,7 @@
 	</bean>
 
 	<mvc:resources mapping="/content/**" location="/content/" />
+	<mvc:resources mapping="/sp/**" location="/sp/" />
 
 	<mvc:annotation-driven />
 

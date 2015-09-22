@@ -79,7 +79,10 @@ public class Login extends BaseController {
 	
 	private PreparedStatement generateStatement(Connection connection, String username, String pwd)
 			throws SQLException {
-		String sqlString = "select * from TblUser where LoginName = '" + username + "' and Password ='" + pwd + "'";
+
+		String sqlString = "select * from TblUser where "
+						+ "LoginName = '" + username + "' and Password ='" + pwd + "'";
+		
 		return connection.prepareStatement(sqlString);
 	}	
 }
