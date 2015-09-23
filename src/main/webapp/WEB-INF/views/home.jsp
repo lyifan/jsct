@@ -5,6 +5,7 @@
 	<thead>
 		<tr>
 			<td/>
+			<td>ID</td>
 			<td>Message</td>
 			<td>Posted By</td>
 		</tr>
@@ -13,6 +14,7 @@
 		<c:forEach var="row" items="${messages}">
 			<tr>
 				<td><a class="d-cell" href='home/delete/${row.messageId}' onclick="return confirm('Delete it?');">&nbsp;&nbsp;</a></td>
+				<td>${row.messageId}</td>
 				<td>${row.message}</td>
 				<td>${row.user}</td>
 			</tr>

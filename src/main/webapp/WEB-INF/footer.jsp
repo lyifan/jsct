@@ -1,4 +1,6 @@
 <hr/>
-<div><a href="home">Home</a><a href='logoff' style='float:right'>Log off</a></div>
+<div style="width: 100%; text-align: center">
+<span class="copy-left">&copy;</span>2015
+</div>
 </body>
 </html>
