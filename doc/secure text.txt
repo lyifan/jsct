@@ -16,4 +16,60 @@ for coding:
 
 	need to investigate to see which one is the best
 	
-	Authentication & Authorization & Audit
+	
+	
+Principal
+
+1.	source code analyser IDE/maven plug-in
+	Target:
+	follow Java secure coding guideline
+
+	Benefit: 
+	find potential issue at the earliest stage
+	guarantee security from source code level
+	save vast amount of code review time
+	big help for developers of all levels
+	
+	Cost:
+	open source projects for free
+	(consider commercials if it's better?)
+	no extra development time
+	build with projects by maven plug-in
+	
+	Open source tools candidates:
+	OWASP LAPSE+
+	Google CodePro Analytix
+	Find Security Bugs
+	OWASP Orizon Project(code review tool)
+	
+	todo:
+	more research to find which one to be used
+
+2. 	Testing
+	Target:
+	thread, memory(leak, high usage), CPU safe
+
+	Benefit:
+	performance
+	robust
+	reduce maintenance cost
+   
+    Cost:
+	open source / commercial tools
+	self development(developers known more details)
+   
+3. 	Authentication & Authorization & Audit
+	Benefit:
+	Guarantee runtime security
+	Provide well grained access control
+	Monitor, trace and analysis system users and resources
+	
+	Target:
+	Configurable
+	Plug-able
+	Implement with standard protocols
+	
+	Cost:
+	Dedicated module/service development and maintenance
+	Open source / commercial implementation
+	
