@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wcg.training.web.model.UserModel;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping(value={"/login"})
 public class Login extends BaseController {
 
 	private String hashPassword(char[] password) {
@@ -79,7 +79,9 @@ public class Login extends BaseController {
 			throws SQLException {
 
 		String sqlString = "select * from TblUser where "
-						+ "LoginName = '" + username + "' and Password ='" + pwd + "'";
+						+ "LoginName = '" + username + "' and Password = '" + pwd + "'";
+		
+		System.out.println(sqlString);
 		
 		return connection.prepareStatement(sqlString);
 	}	

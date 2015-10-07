@@ -1,0 +1,19 @@
+for app:
+	w3af -- (Python, supports plugins)
+
+for coding:
+
+	code review based on security rule
+	thread safe
+	no memory leaks
+
+
+	tools to plugin into IDE
+	Sonar
+	FindSecurityBugs
+	LAPSE
+	PMD -- source code analyzer (https://pmd.github.io/pmd-5.4.0/index.html)
+
+	need to investigate to see which one is the best
+	
+	Authentication & Authorization & Audit

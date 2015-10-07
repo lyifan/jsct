@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wcg.training.service.MessageService;
 
 @Controller
-@RequestMapping({"/", "", "/home"})
+@RequestMapping(value={"/", "", "/home"})
 public class Home extends BaseController {
 
 	@Autowired
 	private MessageService service;
 	
 	@Override
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, value="")
 	public void index(Model model) {
 		model.addAttribute("messages", service.getMessages());
 	}
