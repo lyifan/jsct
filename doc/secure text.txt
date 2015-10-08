@@ -73,3 +73,13 @@ Principal
 	Dedicated module/service development and maintenance
 	Open source / commercial implementation
 	
+Why spring security
+1. Well designed framework, easy to configure, customize and extend
+2. Support plenty of authentication providers(OAuth, OpenID, SAML, LDAP)
+3. Authorization (ACL) and audit (event)
+4. Run-As (Proxy in our dealer POS)
+5. A lot more at http://grails.org/plugin/spring-security-core
+
+What kind of 2nd-factor
+1. One-time Password (popular)
+2. Others which are easier to implement
