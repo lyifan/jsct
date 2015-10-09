@@ -18,53 +18,57 @@ for coding:
 	
 	
 	
-Principal
-
-1.	source code analyser IDE/maven plug-in
-	Target:
-	follow Java secure coding guideline
-
+0. 	Principal
+	This document does not cover what specific tools are going to be used. 
+	Instead, it covers some abstract methodoligies that we should follow during design and development.
+	
+1.	Source code analyser IDE/maven plug-in
 	Benefit: 
-	find potential issue at the earliest stage
-	guarantee security from source code level
-	save vast amount of code review time
-	big help for developers of all levels
-	
+	Find potential issue at the earliest stage
+	Guarantee security from source code level
+	Save vast amount of code review time
+	Gig help for developers of all levels
+
+	Target:
+	Follow Java secure coding guidelines	
+	Integrate into IDEs(Eclipse, ...)
+
 	Cost:
-	open source projects for free
-	(consider commercials if it's better?)
-	no extra development time
-	build with projects by maven plug-in
+	Open source projects for free
+	Consider commercials if it's better?
+	No extra development time	
+	Build with projects by maven plug-in
 	
-	Open source tools candidates:
+	Candidates:
 	OWASP LAPSE+
 	Google CodePro Analytix
 	Find Security Bugs
 	OWASP Orizon Project(code review tool)
-	
-	todo:
-	more research to find which one to be used
 
-2. 	Testing
-	Target:
-	thread, memory(leak, high usage), CPU safe
-
+2. 	Stress testing done by developers
 	Benefit:
-	performance
-	robust
-	reduce maintenance cost
+	High performance
+	High robustness
+	Low maintenance cost
+	
+	Target:
+	Thread safe
+	No memory leaks
+	Low resources(memory, CPU) comsuming
    
     Cost:
-	open source / commercial tools
-	self development(developers known more details)
-   
+	Open source / commercial tools(likely)
+	Self development(developers known more details)
+	Code reviews(manual)
+	
 3. 	Authentication & Authorization & Audit
 	Benefit:
 	Guarantee runtime security
-	Provide well grained access control
+	Provide strictly access control
 	Monitor, trace and analysis system users and resources
 	
 	Target:
+	Running on application level
 	Configurable
 	Plug-able
 	Implement with standard protocols
