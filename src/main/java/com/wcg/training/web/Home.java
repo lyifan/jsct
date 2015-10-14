@@ -27,7 +27,7 @@ public class Home extends BaseController {
 	public String postMessage(Model model, 
 							@RequestParam(value="message")String message, 
 							@RequestParam(value="userId") int userId) {
-		
+				
 		service.addMessage(message, userId);
 		
 		return "redirect:/home";

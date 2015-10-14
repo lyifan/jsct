@@ -2,7 +2,7 @@
 <h2>Please Login</h2>
 <hr/>
 <p style="color:${resultColor}">${result}</p>
-<form method="POST">
+<form method="POST" action="login.do">
 	<div>
 		<div>
 			<div>
@@ -24,6 +24,8 @@
 		<br />
 		<div>
 			<input type="submit" value="Login"/>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />			
 		</div>
 	</div>
 </form>
