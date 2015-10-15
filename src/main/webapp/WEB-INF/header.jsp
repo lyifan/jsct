@@ -8,9 +8,20 @@
 <base href="/jsct/" />
 <title>Java Secure Coding</title>
 <link rel="stylesheet" type="text/css" href="content/css/main.css"/>
+<script type="text/javascript">
+// <!--
+
+
+
+// -->
+</script>
 </head>
 <body>
 	<div>
-		<a href="home">Home</a><a href='logoff' style='float: right'>Log
-			off</a>
+		<a href="home">Home</a>
+		<form id='logoff-form' method='post' action='logoff'>
+			<a href='#' style='float: right' onclick='this.parentNode.submit();return false;'>Log off</a>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />			
+		</form>
 	</div>
