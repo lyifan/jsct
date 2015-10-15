@@ -87,3 +87,41 @@ Why spring security
 What kind of 2nd-factor
 1. One-time Password (popular)
 2. Others which are easier to implement
+
+
+Coding:
+
+1. 	Input validation
+	1.1 Current validation code in CALMS
+       WebSecurityFilter, ValidationProperties.properties
+	1.2 Property way of doing it
+		1.2.1 From Java Secure Coding Guidelines
+			Normalization and replacement
+		1.2.2 How to put in an application 
+			Some design patterns
+				reader, 
+				locator, 
+				resolver, 
+				dispatcher,
+				listener,
+				handler,
+				builder,
+				factory,
+				filter
+			Pipeline of validators for
+				SQL injection
+				XML injection
+				XSS script
+	
+2. 	Hash and encryption
+	2.1 JCE introduction
+	2.2 Coding practise
+		2.2.1 Hash a string
+		2.2.2 Encrypt & decrypt string 
+		2.2.3 Diff them
+
+3.	Asymmetric Encryption
+
+4. 	One-time password and two-factor authentication
+
+5. 	Authorization
