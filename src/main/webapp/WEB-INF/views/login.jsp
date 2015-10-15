@@ -2,7 +2,7 @@
 <h2>Please Login</h2>
 <hr/>
 <p style="color:${resultColor}">${result}</p>
-<form method="POST" action="login.do">
+<form method="POST">
 	<div>
 		<div>
 			<div>
