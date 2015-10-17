@@ -5,19 +5,24 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 <!-- access-decision-manager-ref="myAccessDecisionManager" -->
-	<http auto-config="true" use-expressions="true">
-<!-- 		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" /> -->
-		<intercept-url pattern="/home**" access="#{@myRoleProvider.rolesByUrl}" />
-		<!-- access denied page -->
+	<http use-expressions="true" disable-url-rewriting="true" entry-point-ref="loginEntryPoint">
+ 		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
+ 		<access-denied-handler error-page="/403" />
+		<custom-filter ref="myFormLoginProcessingFilter" position="FORM_LOGIN_FILTER"/>
+		<logout logout-success-url="/login" logout-url="/logoff" success-handler-ref="" />
+		<csrf />
+	</http>
+
+<!-- 	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
 		<access-denied-handler error-page="/403" />
 		<form-login login-page="/login"
 			default-target-url="/welcome"
 			authentication-failure-url="/login?error" username-parameter="loginName"
 			password-parameter="password" />
 		<logout logout-success-url="/login" logout-url="/logoff" success-handler-ref="" />
-		<!-- enable csrf protection -->
 		<csrf />
-	</http>
+	</http> -->
 
 	<authentication-manager>
 		<authentication-provider>
@@ -39,6 +44,26 @@
 		</beans:construct-arg>
 	</beans:bean> -->
 	
-	<beans:bean id="myRoleProvider" class="com.wcg.trainning.security.MyRoleProvider" scope="request" />
+	<beans:bean id="myFormLoginProcessingFilter" class="com.wcg.trainning.security.MyFormLoginProcessingFilter">
+		<beans:constructor-arg>
+			<beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+				<beans:constructor-arg value="/login"/>
+				<beans:constructor-arg value="POST"/>
+			</beans:bean>
+		</beans:constructor-arg>
+		<beans:property name="authenticationManager" ref="myAuthenticationManager" />
+	</beans:bean>
 	
+	<beans:bean id="myAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
+	    <beans:constructor-arg>
+	        <beans:list>
+	            <beans:bean class="com.wcg.trainning.security.MyAuthenticationProvider"/>
+	        </beans:list>
+	    </beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:constructor-arg value="/login"/>
+	</beans:bean>
+
 </beans:beans>
