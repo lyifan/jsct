@@ -4,8 +4,10 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
-<!-- access-decision-manager-ref="myAccessDecisionManager" -->
-	<http use-expressions="true" disable-url-rewriting="true" entry-point-ref="loginEntryPoint">
+	<http use-expressions="true" 
+		disable-url-rewriting="true" 
+		entry-point-ref="loginEntryPoint"
+		access-decision-manager-ref="myAccessDecisionManager">
  		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
  		<access-denied-handler error-page="/403" />
 		<custom-filter ref="myFormLoginProcessingFilter" position="FORM_LOGIN_FILTER"/>
@@ -33,17 +35,9 @@
 		</authentication-provider>
 	</authentication-manager>
 
-<!-- 	<beans:bean id="myAccessDecisionManager"
-		class="com.wcg.trainning.security.CustomAccessDecisionManager">
-		<beans:property name="allowIfAllAbstainDecisions"
-			value="false" />
-		<beans:construct-arg name="decisionVoters">
-			<beans:list>
-				<beans:bean class="org.springframework.security.access.vote.RoleVoter" />
-			</beans:list>
-		</beans:construct-arg>
-	</beans:bean> -->
-	
+	<beans:bean id="myAccessDecisionManager"
+		class="com.wcg.trainning.security.CustomAccessDecisionManager"/>
+
 	<beans:bean id="myFormLoginProcessingFilter" class="com.wcg.trainning.security.MyFormLoginProcessingFilter">
 		<beans:constructor-arg>
 			<beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">

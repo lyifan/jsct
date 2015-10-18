@@ -1,6 +1,7 @@
 package com.wcg.training.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class Home extends BaseController {
 	@RequestMapping(method=RequestMethod.GET, value="")
 	public void index(Model model) {
 		model.addAttribute("messages", service.getMessages());
+		model.addAttribute("loginName", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 	}
 	
 	@RequestMapping(value="/post", method=RequestMethod.POST)

@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<h2>Welcome, ${USER.loginName}</h2>
+<h2>Welcome, ${loginName}</h2>
 <hr />
 <table>
 	<thead>
