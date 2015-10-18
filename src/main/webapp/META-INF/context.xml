@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<Context path="/training" useHttpOnly="false">
+<Context path="/jsct" useHttpOnly="false">
 	<Resource name="jdbc/trainingDB" auth="Container" type="javax.sql.DataSource"
 		maxActive="100" maxIdle="30" maxWait="10000"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url="jdbc:sqlserver://localhost:1433;DatabaseName=Test;integratedSecurity=true;"/>
+		url="jdbc:sqlserver://localhost:1433;DatabaseName=jsct;integratedSecurity=true;"/>
 </Context>

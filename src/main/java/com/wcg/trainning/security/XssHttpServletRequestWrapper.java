@@ -1,4 +1,4 @@
-package com.wcg.training.service;
+package com.wcg.trainning.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

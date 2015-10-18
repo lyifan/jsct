@@ -13,31 +13,34 @@ public abstract class GenericDao<T extends java.io.Serializable> {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
 	public GenericDao(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 
     @SuppressWarnings("unchecked")
 	public List<T> getAll() {
-    	return (List<T>)this.sessionFactory.getCurrentSession()
+    	return (List<T>)this.getCurrentSession()
     					.createCriteria(this.entityClass).list();
     }
 
     public T getById(int id) {
-    	return this.sessionFactory.getCurrentSession().get(this.entityClass, id);
+    	return this.getCurrentSession().get(this.entityClass, id);
     }
     
     public void save(T entity) {
-    	this.sessionFactory.getCurrentSession().save(entity);
+    	this.getCurrentSession().save(entity);
     }
     
     public void deleteById(int id) {
-    	Session currentSession = this.sessionFactory.getCurrentSession();
+    	Session currentSession = this.getCurrentSession();
 		Query query = currentSession.createQuery("delete " + this.entityClass.getName() + " where id = :ID");
     	query.setParameter("ID", id);
     	 
     	query.executeUpdate();
     }
 	
+    protected Session getCurrentSession() {
+    	return this.sessionFactory.getCurrentSession();
+    }
 }

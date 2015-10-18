@@ -9,6 +9,7 @@
 		entry-point-ref="loginEntryPoint"
 		access-decision-manager-ref="myAccessDecisionManager">
  		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
+ 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
  		<access-denied-handler error-page="/403" />
 		<custom-filter ref="myFormLoginProcessingFilter" position="FORM_LOGIN_FILTER"/>
 		<logout logout-success-url="/login" logout-url="/logoff" success-handler-ref="" />

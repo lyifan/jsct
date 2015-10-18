@@ -19,6 +19,7 @@
 <body>
 	<div>
 		<a href="home">Home</a>
+		<a href="admin/user">Manage Users</a>
 		<form id='logoff-form' method='post' action='logoff'>
 			<a href='#' style='float: right' onclick='this.parentNode.submit();return false;'>Log off</a>
 			<input type="hidden" name="${_csrf.parameterName}"

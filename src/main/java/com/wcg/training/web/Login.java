@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wcg.training.web.model.UserModel;
+import com.wcg.training.domain.User;
 
 @Controller
 @RequestMapping(value={"/login"})
@@ -53,9 +53,9 @@ public class Login extends BaseController {
 			return "/login";
 		}
 		
-		UserModel user = new UserModel();
+		User user = new User();
 		user.setLoginName(rs.getString("LoginName"));
-		user.setUserId(rs.getInt("ID"));
+		user.setId(rs.getInt("ID"));
 		
 		session.setAttribute("USER", user);
 		
