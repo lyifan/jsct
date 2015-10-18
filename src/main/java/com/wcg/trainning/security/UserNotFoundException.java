@@ -1,6 +1,6 @@
 package com.wcg.trainning.security;
 
-public class LoginnamePasswordException extends Exception {
+public class UserNotFoundException extends Exception {
 
 	/**
 	 * 

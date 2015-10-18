@@ -27,4 +27,22 @@ public class UserService {
 	public List<User> findUsers(String loginName) {
 		return _userDao.searchUserByLoginName(loginName);
 	}
+	
+	public User findUser(String loginName, String password) {
+		
+		User target = null;
+		
+		List<User> users = this.findUsers(loginName);
+		
+		for(User user : users) {
+			// refactor to use a PasswordMatcher
+			// which compares hash instead of plain text
+			if(user.getPassword().equals(password)) {
+				target = user;
+				break;
+			}
+		}
+		
+		return target;
+	}
 }

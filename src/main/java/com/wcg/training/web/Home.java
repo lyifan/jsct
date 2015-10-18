@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wcg.training.service.MessageService;
+import com.wcg.trainning.security.MyAuthentication;
 
 @Controller
 @RequestMapping(value={"/", "", "/home"})
@@ -22,7 +23,8 @@ public class Home extends BaseController {
 	@RequestMapping(method=RequestMethod.GET, value="")
 	public void index(Model model) {
 		model.addAttribute("messages", service.getMessages());
-		model.addAttribute("loginName", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		MyAuthentication authentication = (MyAuthentication)SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("USER", authentication.getUser());
 	}
 	
 	@RequestMapping(value="/post", method=RequestMethod.POST)

@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<h2>Welcome, ${loginName}</h2>
+<h2>Welcome, ${USER.loginName}</h2>
 <hr />
 <table>
 	<thead>
@@ -34,7 +34,8 @@
 	<div>
 		<input type="submit" value="Post" />
 	</div>
-	<input type="hidden" name="userId" value="${USER.userId}" />
+	<input type="hidden" name="userId" value="${USER.id}" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 <script type="text/javascript">
 function _delete(id) {
