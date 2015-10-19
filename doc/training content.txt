@@ -1,8 +1,3 @@
-Prepare:
-	1. download and install git: https://git-scm.com/download/win
-	2. download and install tomcat 8
-	3. checkout project: git clone -b dev --single-branch https://github.com/lyifan/jsct.git
-
 Basic concept and tools:
 	1. Security providers
 		providers implement Security interfaces and crypto algorithms
@@ -28,7 +23,6 @@ Basic concept and tools:
 	byte[] text = "Hello World".getBytes("ASCII");
 	byte[] cipherText = new byte[text.length];
 
-
 	SecretKeySpec key = new SecretKeySpec(passwd.getBytes("ASCII"), "ARCFOUR");
 
 	cipher.init(Cipher.ENCRYPT_MODE, key);
@@ -45,13 +39,22 @@ Basic concept and tools:
 
 	println(new String(plainText, "ASCII"));
 	
-	4. Java keytool 	
+	4. Asymmetric encrytion & PKI
+	
+	5. Java keytool 	
 	
 	
 Web Applicatioin Work Flow:
 	1. How request is processed and response is sent
 	2. How Filters work
 	3. Spring security filters and FilterChain
+	
+afternoon:
+	
+Prepare:
+	1. download and install git: https://git-scm.com/download/win
+	2. download and install tomcat 8
+	3. checkout project: git clone -b dev --single-branch https://github.com/lyifan/jsct.git	
 	
 Enable Spring Security:
 	1. Add dependencies into pom.xml
