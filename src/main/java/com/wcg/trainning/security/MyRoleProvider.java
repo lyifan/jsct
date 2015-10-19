@@ -18,6 +18,7 @@ public class MyRoleProvider {
 		return "hasRole('ROLE_ADMIN')";
 	}
 	
+	@SuppressWarnings("unused")
 	private String getRequestUrl() {
 		return 
 				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())

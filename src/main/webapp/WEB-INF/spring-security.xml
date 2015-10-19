@@ -8,12 +8,14 @@
 		disable-url-rewriting="true" 
 		entry-point-ref="loginEntryPoint"
 		access-decision-manager-ref="myAccessDecisionManager">
+		<custom-filter ref="mytAntiSamyFilter" position="LAST"/>
  		<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
  		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
  		<access-denied-handler error-page="/403" />
 		<custom-filter ref="myFormLoginProcessingFilter" position="FORM_LOGIN_FILTER"/>
 		<logout logout-success-url="/login" logout-url="/logoff" success-handler-ref="" />
 		<csrf />
+		<headers />
 	</http>
 
 <!-- 	<http auto-config="true" use-expressions="true">
@@ -37,7 +39,7 @@
 	</authentication-manager>
 
 	<beans:bean id="myAccessDecisionManager"
-		class="com.wcg.trainning.security.CustomAccessDecisionManager"/>
+		class="com.wcg.trainning.security.MyAccessDecisionManager"/>
 
 	<beans:bean id="myFormLoginProcessingFilter" class="com.wcg.trainning.security.MyFormLoginProcessingFilter">
 		<beans:constructor-arg>
@@ -60,5 +62,7 @@
 	<beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<beans:constructor-arg value="/login"/>
 	</beans:bean>
+	
+	<beans:bean id="mytAntiSamyFilter" class="com.wcg.trainning.security.AntiSamyFilter"/>
 
 </beans:beans>

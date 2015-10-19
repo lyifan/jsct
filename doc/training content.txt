@@ -1,0 +1,125 @@
+Prepare:
+	1. download and install git: https://git-scm.com/download/win
+	2. download and install tomcat 8
+	3. checkout project: git clone -b dev --single-branch https://github.com/lyifan/jsct.git
+
+Basic concept and tools:
+	1. Security providers
+		providers implement Security interfaces and crypto algorithms
+		
+		code to list all providers and algorithms
+		Provider[] p = Security.getProviders();
+		for (int i = 0; i < p.length; i++) {
+		  System.out.println(p[i].getName());
+		  Iterator<Provider.Service> it =  p[i].getServices().iterator();
+		  while (it.hasNext())
+			  System.out.println("\t" + it.next().getAlgorithm());
+		}
+		
+	2. Hash 
+	3. Symmetric Encryption
+
+	import java.security.Security;
+	import javax.crypto.Cipher;
+	import javax.crypto.spec.SecretKeySpec;
+
+	Cipher cipher = Cipher.getInstance("ARCFOUR");
+	String passwd = "12345678";
+	byte[] text = "Hello World".getBytes("ASCII");
+	byte[] cipherText = new byte[text.length];
+
+
+	SecretKeySpec key = new SecretKeySpec(passwd.getBytes("ASCII"), "ARCFOUR");
+
+	cipher.init(Cipher.ENCRYPT_MODE, key);
+
+	int ctLength = cipher.update(text, 0, text.length, cipherText, 0);
+	ctLength += cipher.doFinal(cipherText, ctLength);
+
+	println(cipherText)
+
+	byte[] plainText = new byte[ctLength];
+	cipher.init(Cipher.DECRYPT_MODE, key);
+	int ptLength = cipher.update(cipherText, 0, ctLength, plainText, 0);
+	ptLength += cipher.doFinal(plainText, ptLength);
+
+	println(new String(plainText, "ASCII"));
+	
+	4. Java keytool 	
+	
+	
+Web Applicatioin Work Flow:
+	1. How request is processed and response is sent
+	2. How Filters work
+	3. Spring security filters and FilterChain
+	
+Enable Spring Security:
+	1. Add dependencies into pom.xml
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		
+	2. Add new filter into web.xml
+		<filter>
+			<filter-name>springSecurityFilterChain</filter-name>
+			<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		</filter>
+
+		<filter-mapping>
+			<filter-name>springSecurityFilterChain</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
+		
+		** comment out the two existing filters
+	
+	3. Run it with tomcat server in Eclipse.
+		Seeing No bean named 'springSecurityFilterChain' is defined means OK
+	
+	4. Creat a new config file spring-security.xml under WEB-INF folder
+		<beans:beans xmlns="http://www.springframework.org/schema/security"
+			xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security
+			http://www.springframework.org/schema/security/spring-security.xsd">
+
+			<http auto-config="true" use-expressions="true">
+				<intercept-url pattern="/home**" access="hasRole('ROLE_ADMIN')" />
+				<form-login login-page="/login"
+					default-target-url="/welcome"
+					authentication-failure-url="/login?error" username-parameter="loginName"
+					password-parameter="password" />
+				<logout logout-success-url="/login" logout-url="/logoff" success-handler-ref="" />
+			</http>
+			
+			<authentication-manager>
+				<authentication-provider>
+					<user-service>
+						<user name="alpha" password="pass1"
+							authorities="ROLE_ADMIN" />
+					</user-service>
+				</authentication-provider>
+			</authentication-manager>	
+
+		</beans:beans>	
+
+	5. Add the above file name into web.xml
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-config.xml,/WEB-INF/spring-security.xml</param-value>
+		</context-param>
+		
+	6. Will find posting a message is not working. 
+	   Because the 'postMessage' method in Home.java requires user id as a parameter, which does not exist now
+	
+Customize Spring Security (if have time, do this!!!)
+	1. Login Form -- MyFormLoginProcessingFilter
+	2. Authentication Provider -- MyAuthenticationProvider (inside redefined myAuthenticationManager)
+	3. MyAccessDecisionManager
