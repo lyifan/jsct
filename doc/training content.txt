@@ -1,4 +1,9 @@
-Basic concept and tools:
+Morning:
+1. download groovy from http://www.groovy-lang.org/download.html
+
+Some basic concept and tools:
+	0. Java security infrastructure:
+
 	1. Security providers
 		providers implement Security interfaces and crypto algorithms
 		
@@ -39,17 +44,33 @@ Basic concept and tools:
 
 	println(new String(plainText, "ASCII"));
 	
-	4. Asymmetric encrytion & PKI
+	4. Asymmetric encryption
+		open 
 	
-	5. Java keytool 	
+	5. PKI & java keytool
+		5.1 Key Pair
+		5.2 Certificate
+			
+	6. SSL
+		use openssl to generate certificates https://indy.fulgan.com/SSL/
+		1. self sign ca cert:
+			openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 3650
+		2. generate req:
+			openssl req -newkey rsa:2048 -keyout my.key -out my.pem -config openssl.cnf
+		3. sign req:
+			openssl ca -config openssl.cnf -in my.pem -out my.crt
+		4. export into p12
+			openssl pkcs12 -export -in my.crt -inkey my.key -chain -CAfile .\demoCA\cacert.pem -out my.p12
+		configure Tomcat to run SSL
+		client certificate demo
+
 	
+afternoon:
 	
 Web Applicatioin Work Flow:
 	1. How request is processed and response is sent
 	2. How Filters work
 	3. Spring security filters and FilterChain
-	
-afternoon:
 	
 Prepare:
 	1. download and install git: https://git-scm.com/download/win
@@ -122,7 +143,14 @@ Enable Spring Security:
 	6. Will find posting a message is not working. 
 	   Because the 'postMessage' method in Home.java requires user id as a parameter, which does not exist now
 	
+	7. custom XSS filter
+	
+	8. Prevent some attacks
+	
+	
 Customize Spring Security (if have time, do this!!!)
 	1. Login Form -- MyFormLoginProcessingFilter
 	2. Authentication Provider -- MyAuthenticationProvider (inside redefined myAuthenticationManager)
 	3. MyAccessDecisionManager
+	
+One-time password
